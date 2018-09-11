@@ -7,34 +7,17 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 /**
  * Event emitted when there is an error in loading.
  */
-public class TopLoadingErrorEvent extends Event<TopLoadingErrorEvent> {
+class TopLoadingErrorEvent(viewId: Int, val eventData: WritableMap): Event<TopLoadingErrorEvent>(viewId) {
 
-  public static final String EVENT_NAME = "topLoadingError";
-  private WritableMap mEventData;
-
-  public TopLoadingErrorEvent(int viewId, WritableMap eventData) {
-    super(viewId);
-    mEventData = eventData;
+  companion object {
+      val EVENT_NAME = "topLoadingError"
   }
 
-  @Override
-  public String getEventName() {
-    return EVENT_NAME;
-  }
+  override fun getEventName() = EVENT_NAME
 
-  @Override
-  public boolean canCoalesce() {
-    return false;
-  }
+  override fun canCoalesce() = false
 
-  @Override
-  public short getCoalescingKey() {
-    // All events for a given view can be coalesced.
-    return 0;
-  }
+  override fun getCoalescingKey() = 0.toShort()
 
-  @Override
-  public void dispatch(RCTEventEmitter rctEventEmitter) {
-    rctEventEmitter.receiveEvent(getViewTag(), getEventName(), mEventData);
-  }
+  override fun dispatch(rctEventEmitter: RCTEventEmitter) = rctEventEmitter.receiveEvent(viewTag, eventName, eventData)
 }

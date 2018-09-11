@@ -7,34 +7,17 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 /**
  * Event emitted when loading has started
  */
-public class TopLoadingStartEvent extends Event<TopLoadingStartEvent> {
+class TopLoadingStartEvent(viewId: Int, val eventData: WritableMap): Event<TopLoadingStartEvent>(viewId) {
 
-  public static final String EVENT_NAME = "topLoadingStart";
-  private WritableMap mEventData;
-
-  public TopLoadingStartEvent(int viewId, WritableMap eventData) {
-    super(viewId);
-    mEventData = eventData;
+  companion object {
+    val EVENT_NAME = "topLoadingStart"
   }
 
-  @Override
-  public String getEventName() {
-    return EVENT_NAME;
-  }
+  override fun getEventName() = EVENT_NAME
 
-  @Override
-  public boolean canCoalesce() {
-    return false;
-  }
+  override fun canCoalesce() = false
 
-  @Override
-  public short getCoalescingKey() {
-    // All events for a given view can be coalesced.
-    return 0;
-  }
+  override fun getCoalescingKey() = 0.toShort()
 
-  @Override
-  public void dispatch(RCTEventEmitter rctEventEmitter) {
-    rctEventEmitter.receiveEvent(getViewTag(), getEventName(), mEventData);
-  }
+  override fun dispatch(rctEventEmitter: RCTEventEmitter) = rctEventEmitter.receiveEvent(viewTag, eventName, eventData)
 }

@@ -1,6 +1,5 @@
 package com.reactnativecommunity.webview.events;
 
-import com.facebook.react.bridge.WritableMap;
 import com.facebook.react.bridge.Arguments;
 import com.facebook.react.uimanager.events.Event;
 import com.facebook.react.uimanager.events.RCTEventEmitter;
@@ -8,36 +7,21 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 /**
  * Event emitted when there is an error in loading.
  */
-public class TopMessageEvent extends Event<TopMessageEvent> {
+class TopMessageEvent(viewId: Int, val eventData: String): Event<TopMessageEvent>(viewId) {
 
-  public static final String EVENT_NAME = "topMessage";
-  private final String mData;
-
-  public TopMessageEvent(int viewId, String data) {
-    super(viewId);
-    mData = data;
+  companion object {
+    val EVENT_NAME = "topMessage"
   }
 
-  @Override
-  public String getEventName() {
-    return EVENT_NAME;
-  }
+  override fun getEventName() = EVENT_NAME
 
-  @Override
-  public boolean canCoalesce() {
-    return false;
-  }
+  override fun canCoalesce() = false
 
-  @Override
-  public short getCoalescingKey() {
-    // All events for a given view can be coalesced.
-    return 0;
-  }
+  override fun getCoalescingKey() = 0.toShort()
 
-  @Override
-  public void dispatch(RCTEventEmitter rctEventEmitter) {
-    WritableMap data = Arguments.createMap();
-    data.putString("data", mData);
-    rctEventEmitter.receiveEvent(getViewTag(), EVENT_NAME, data);
+  override fun dispatch(rctEventEmitter: RCTEventEmitter) {
+    val data = Arguments.createMap()
+    data.putString("data", eventData);
+    rctEventEmitter.receiveEvent(viewTag, eventName, data);
   }
 }
