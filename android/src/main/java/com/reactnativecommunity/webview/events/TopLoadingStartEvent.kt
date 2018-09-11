@@ -7,7 +7,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 /**
  * Event emitted when loading has started
  */
-class TopLoadingStartEvent(viewId: Int, val eventData: WritableMap): Event<TopLoadingStartEvent>(viewId) {
+class TopLoadingStartEvent(viewId: Int, private val eventData: WritableMap): Event<TopLoadingStartEvent>(viewId) {
 
   companion object {
     val EVENT_NAME = "topLoadingStart"

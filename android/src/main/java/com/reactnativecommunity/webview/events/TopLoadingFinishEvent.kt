@@ -7,7 +7,7 @@ import com.facebook.react.uimanager.events.RCTEventEmitter;
 /**
  * Event emitted when loading is completed.
  */
-class TopLoadingFinishEvent(viewId: Int, val eventData: WritableMap): Event<TopLoadingFinishEvent>(viewId) {
+class TopLoadingFinishEvent(viewId: Int, private val eventData: WritableMap): Event<TopLoadingFinishEvent>(viewId) {
 
   companion object {
     val EVENT_NAME = "topLoadingFinish"
