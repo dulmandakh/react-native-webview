@@ -1,14 +1,13 @@
-package com.reactnativecommunity.webview.events;
+package com.reactnativecommunity.webview.events
 
-import com.facebook.react.bridge.WritableMap;
-import com.facebook.react.uimanager.events.Event;
-import com.facebook.react.uimanager.events.RCTEventEmitter;
+import com.facebook.react.bridge.WritableMap
+import com.facebook.react.uimanager.events.Event
+import com.facebook.react.uimanager.events.RCTEventEmitter
 
 /**
  * Event emitted when there is an error in loading.
  */
 class TopLoadingErrorEvent(viewId: Int, private val eventData: WritableMap): Event<TopLoadingErrorEvent>(viewId) {
-
   companion object {
     val EVENT_NAME = "topLoadingError"
   }

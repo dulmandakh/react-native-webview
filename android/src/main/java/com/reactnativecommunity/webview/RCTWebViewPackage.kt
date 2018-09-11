@@ -1,7 +1,7 @@
-package com.reactnativecommunity.webview;
+package com.reactnativecommunity.webview
 
-import com.facebook.react.ReactPackage;
-import com.facebook.react.bridge.ReactApplicationContext;
+import com.facebook.react.ReactPackage
+import com.facebook.react.bridge.ReactApplicationContext
 
 class RCTWebViewPackage : ReactPackage {
     override fun createNativeModules(reactContext: ReactApplicationContext) = arrayListOf(
