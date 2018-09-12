@@ -12,6 +12,7 @@ import com.facebook.react.common.ReactConstants
 import com.facebook.react.common.build.ReactBuildConfig
 import com.facebook.react.uimanager.ThemedReactContext
 import com.reactnativecommunity.webview.RCTWebViewManager.BRIDGE_NAME
+import com.reactnativecommunity.webview.RCTWebViewManager.dispatchEvent
 import com.reactnativecommunity.webview.events.TopMessageEvent
 
 /**
@@ -73,7 +74,7 @@ class RCTWebView(reactContext: ThemedReactContext) : WebView(reactContext), Life
     }
 
     fun callInjectedJavaScript() {
-        if (getSettings().javaScriptEnabled &&
+        if (settings.javaScriptEnabled &&
                 injectedJS != null &&
                 !TextUtils.isEmpty(injectedJS)) {
             loadUrl("javascript:(function() {\n$injectedJS;\n})();")
@@ -102,10 +103,10 @@ class RCTWebView(reactContext: ThemedReactContext) : WebView(reactContext), Life
     }
 
     fun onMessage(message: String) {
-        RCTWebViewManager.dispatchEvent(this, TopMessageEvent(this.getId(), message))
+        dispatchEvent(this, TopMessageEvent(this.getId(), message))
     }
 
-    private fun cleanupCallbacksAndDestroy() {
+    fun cleanupCallbacksAndDestroy() {
         setWebViewClient(null)
         destroy()
     }
